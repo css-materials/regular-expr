@@ -10,9 +10,9 @@ output:
 
 Regular Expressions or "regexes" (but you will frequently hear also the singular name "regex"): **is a language for pattern matching** used by many other programming languages such as R, Python, etc.
 
-Regular Expressions allow to manipulate texts. They **are strings containing normal characters and/or special meta-characters** that describe a particular pattern that we want to match in a given text.
+Regular Expressions allow us to manipulate texts. They **are strings containing normal characters and/or special meta-characters** that describe a particular pattern that we want to match in a given text.
 
-Thus they are **especially handy for any task that deals with text**: NLP or data-cleaning tasks (e.g., find words that include a given set of letters, how often do past tenses occur in a text, find emails or phone numbers, find and replace HTML tags, etc.).
+Thus they are **especially handy for any task that deals with text**: NLP or data-cleaning tasks (e.g., find words that include a given set of letters, how often past tenses occur in a text, find emails or phone numbers, find and replace HTML tags, etc.).
 
 `stringr` and regular expressions will be particularly useful for those of you who plan to work with textual data in this course and beyond.  
 

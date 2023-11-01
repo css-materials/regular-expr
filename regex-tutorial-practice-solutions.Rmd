@@ -2,7 +2,6 @@
 title: "Regular expressions in R - solutions to in-class practice"
 date: "`r lubridate::today()`"
 output: html_document
-always_allow_html: true
 ---
 
 ```{r}
@@ -59,4 +58,4 @@ email <- "smith90@uchicago.edu nardin@uchicago.edu happy2@uchicago.edu"
 str_view_all(email, "[a-z]+[0-9]*@uchicago\\.edu")
 ```
 
-Unpack the solution for practice 4: `[a-z]+` matches one or more characters, `[0-9]*` matches zero or more numbers, `@uchicago\.edu` is a literal match with `\` to match the dot literally
+Solution: `[a-z]+` matches one or more characters, `[0-9]*` matches zero or more numbers, `@uchicago\.edu` is a literal match with `\` to match the dot literally

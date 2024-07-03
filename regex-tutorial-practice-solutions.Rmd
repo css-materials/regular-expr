@@ -59,3 +59,23 @@ str_view_all(email, "[a-z]+[0-9]*@uchicago\\.edu")
 ```
 
 Solution: `[a-z]+` matches one or more characters, `[0-9]*` matches zero or more numbers, `@uchicago\.edu` is a literal match with `\` to match the dot literally
+
+
+**PRACTICE 5.** Apply regular expressions to "Alice in Wonderland"
+
+Find and replace all uppercase words. Notice `\\b` specifies word boundaries (word boundary anchor) 
+```{r}
+# find
+str_view(alice, "\\b[A-Z]+\\b")
+
+# replace
+str_replace_all(alice, "\\b[A-Z]+\\b", function(x) tolower(x))
+```
+
+Find all present progressive verbs that have as previous word an auxiliar (e.g., was beginning, was reading)
+```{r}
+pattern <- "\\b(is|are|was|were)\\s+[a-z]+ing\\b"
+matches <- str_extract_all(alice, pattern)
+```
+
+

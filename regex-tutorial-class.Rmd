@@ -48,10 +48,7 @@ x <- c("This is a sentence to practice regular expressions",
 ```
 
 ```{r}
-str_view(x, "re")
-str_view(x, "regex")
-str_view(x, "sentence")
-str_view_all(x, "sentence")
+
 ```
 
 This is fine, but regular expressions are more powerful than simply replacing manually specified characters or full words: they use **meta-characters**, that is characters that have a unique meaning to the regex matching engine and that vastly enhance the search capability.
@@ -61,25 +58,19 @@ This is fine, but regular expressions are more powerful than simply replacing ma
 
 **The `.` matches any single character:**
 ```{r}
-str_view(x, "re.")
-str_view(x, "re...")
+
 ```
 
 The `.` dot is a wildcard that matches any single character (except for newline characters). It is useful when dealing with a mix of characters (letters, digits, whitespace, special characters, etc.) or when you don't have detailed information about the text you are trying to match.
 
 **The `^` caret anchors a match to the start of the string:**
 ```{r}
-str_view(x, "^re")
-str_view(x, "^F")
-str_view(x, "^F...")
+
 ```
 
 **The `$` dollar sign anchors a match to the end of the string:**
 ```{r}
-str_view(x, "s$")
-str_view(x, ".s$")
-str_view_all(x, "e$")
-str_view_all(x, "e")
+
 ```
 
 
@@ -92,37 +83,34 @@ str_view_all(x, "e")
 
 **The `or` operator is represented using the `|` character:**
 ```{r}
-str_view(x, "regular|regex")
+
 ```
 
 The `or` operator can also be represented by grouping a set of characters using `[]`, which is shorthand for `|`. The main difference is that `[]` only works for single characters, not for entire words.
 
 **Use `[]` to match any (one) of the characters in the `[]`** (e.g., [abc] matches a, b, or c):
 ```{r}
-str_view(x, "[re]")
-str_view_all(x, "[re]")
+
 ```
 
 **Use `[]` with a `^` caret placed after the first `[` to match anything except what is in the `[]`** (e.g., [^abc] matches anything except a, b, or c):
 ```{r}
-str_view(x, "[^re]")
-str_view_all(x, "[^re]")
+
 ```
 
 **If placed outside square brackets, the caret has a different meaning**: itchecks whether one or more characters are located at the beginning of a strings:
 ```{r}
-str_view_all(x, "^[re]")
+
 ```
 
 **The square brackets can be used to show any consecutive letters or numbers.** For example, use `[0-9]` to check whether a string contains any three consecutive decimal digit characters:
 ```{r}
 y <- "'ciao_Good_123_12hi"
-str_view_all(y, "[0-9][0-9][0-9]")
 ```
 
 To check whether our string contains four alphabetic characters between the letter a and z included, use `[a-z]` for lowercase and `[A-Z]` for uppercase characters:
 ```{r}
-str_view_all(y, "[a-zA-Z][a-z][a-z][a-z]")
+
 ```
 
 
@@ -148,38 +136,38 @@ z <- "There are several assignments in this course: HW1, HW2, HW3, HW4, etc..."
 
 **`\d` matches any decimal digit character, same as [0-9]**
 ```{r}
-str_view_all(z, "HW\\d")
+
 ```
 
 Note the `\\` double-backslashes: this is because to include a literal backslash (as in the meta-character `\d`) you need to double it. If you want to avoid the double-backslashes, pass the regular expression as a "raw string":
 ```{r}
-str_view_all(z, r"(HW\d)")
+
 ```
 A raw string is a normal string but prefixed with an `r`. Raw strings allow to interpret the backslash `\` as a literal character, rather than an escape character.
 
 **`\D` matches any character that is NOT decimal digit, same as [^0-9]**
 ```{r}
-str_view_all(z, "HW\\D")
+
 ```
 
 **`\w` matches any alphanumeric character, same as [a-zA-Z0-9]**
 ```{r}
-str_view_all(z, "\\w")
+
 ```
 
 **`\W` matches any character that is NOT alphanumeric, same as [^a-zA-Z0-9]**
 ```{r}
-str_view_all(z, "\\W")
+
 ```
 
 **`\s` matches any white space character**
 ```{r}
-str_view_all(z, "\\s")
+
 ```
 
 **`\S` matches any character that is NOT white space**
 ```{r}
-str_view_all(z, "\\S")
+
 ```
 
 
@@ -210,11 +198,7 @@ The most common quantifiers are:
 
 For example, we can use quantifiers to achieve the same results we did in practice 3 (extract all phone numbers from a string):
 ```{r}
-str_view_all(s, "[0-9]{3}-[0-9]{4}")
-str_view_all(s, "\\d{3}-\\d{4}")
-str_view_all(s, "\\d+-\\d+")
-# with raw string
-str_view_all(s, r"(\d+-\d+)")
+
 ```
 
 Let's see a few more examples of quantifiers:
@@ -224,36 +208,32 @@ example <- "zooooom in oh oh!"
 
 `o*` matches the letter "o" zero or more repetitions
 ```{r}
-str_view(example, "o*")
+
 ```
 
 `o{5}` matches "o" exactly 5 contiguous times
 ```{r}
-str_view_all(example, "o{5}")
+
 ```
 
 `o{,5}` matches "o" between 1 and 5 contiguous times
 ```{r}
-str_view_all(example, "o{1,5}")
+
 ```
 
 We can also represent ranges of common values as sets. The following regex matches any series of two letters and one number:
 ```{r}
 p <- "hw1, HW2, Hw3"
-str_view_all(p, "[A-Za-z]{2}[0-9]")
 ```
 
 And we can negate values in the set using the caret `^`: 
 ```{r}
-str_view_all(p, "[^a-z]{2}[0-9]")
+
 ```
 
 To match the names in the sentence below we can use `[a-z]` and literal matches along with the `*` quantifier which matches zero or more recurrences of a single character:
 ```{r}
 q <- "#richard said that #bob loved the dinner cooked by @susan"
-str_view_all(q, r"([#@][a-zA-Z]+)")
-#str_view_all(q, r"([#@][a-zA-Z\$]+)")
- # match zero or more with asterisk
 ```
 
 Notice that quantifiers, like * or + or ?, apply to the character immediately to the left and not the full set of characters. 
@@ -302,10 +282,6 @@ Below are additional examples to illustrate other common functions from `stringr
 
 Let's imagine we have a text, here the beginning of Alice in Wonderland, and we want to manipulate it. 
 ```{r}
-alice <- "Alice was beginning to get very tired of sitting by her sister on the bank, and of having nothing to do: once or twice she had peeped into the book her sister was reading, but it had no pictures or conversations in it, 'and what is the use of a book,' thought Alice 'without pictures or conversation?'"
-```
-
-```{r}
 alice <- "Alice was beginning to get very tired of sitting by her sister on the bank, and of having nothing to do: \
 once or twice she had peeped into the book her sister was reading, but it had no pictures or conversations in it, \
 'and what is the use of a book,' thought Alice 'without pictures or conversation?' So she was considering in her own mind \
@@ -333,50 +309,44 @@ so managed to put it into one of the cupboards as she fell past it. \ "
 
 **`str_count()`: count the number of matches**
 ```{r}
-str_count(alice, "[a-z]*ing")
+
 ```
 
 **`str_extract()` and `str_extract_all()`: extract matches**
 ```{r}
-str_extract_all(alice, "[a-z]*ing")
+
 ```
 
 **`str_replace()` and `str_replace_all()`: replace matches**
 ```{r}
-str_replace_all(alice, ",", "")
+
 ```
 
 ```{r}
-str_replace_all(alice, "[[:punct:]]", "")
+
 ```
 
 **`str_split()`: split a string based on a match**
 ```{r}
-str_split(alice, ",")
+
 ```
 
 Matches are generally saved in a list. For example:
 ```{r}
-split_text <- str_split(alice, ",")
-is.list(split_text)
-split_text
+
 ```
+
 
 **PRACTICE 5.** Apply regular expressions to "Alice in Wonderland"
 
 Find and replace all uppercase words. Notice `\\b` specifies word boundaries (word boundary anchor) 
 ```{r}
-# find
-str_view(alice, "\\b[A-Z]+\\b")
-
-# replace
-str_replace_all(alice, "\\b[A-Z]+\\b", function(x) tolower(x))
+# your code here
 ```
 
 Find all present progressive verbs that have as previous word an auxiliar (e.g., was beginning, was reading)
 ```{r}
-pattern <- "\\b(is|are|was|were)\\s+[a-z]+ing\\b"
-matches <- str_extract_all(alice, pattern)
+# your code here
 ```
 
 

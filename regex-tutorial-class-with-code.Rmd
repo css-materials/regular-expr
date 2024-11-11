@@ -6,6 +6,11 @@ output:
     toc: true
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, results = 'show', 
+                      message = FALSE, warning = FALSE)
+```
+
 ## Definition
 
 Regular expressions ("regex" or "regexes") **are strings containing normal characters and/or special meta-characters.** They describe a specific pattern to match in a given text. More formally, regex is a *language on its own right*  used for *pattern matching* in many programming languages.
@@ -23,7 +28,7 @@ suppressPackageStartupMessages(library(tidyverse))
 Use functions from this package in combination with regular expressions ([see the cheat sheet](https://evoldyn.gitlab.io/evomics-2018/ref-sheets/R_strings.pdf)) to extract text from strings. We start with two helper functions from this package: 
 
 * `str_view()` returns the first regex match
-* `str_view_all()` returns all regex matches (deprecated in stringr v1-5-0 https://www.tidyverse.org/blog/2022/12/stringr-1-5-0/)
+* `str_view_all()` returns all regex matches (deprecated in stringr `v1-5-0` https://www.tidyverse.org/blog/2022/12/stringr-1-5-0/)
 
 These two functions take a string (character vector) and a regular expressions as inputs, and return the match. 
 
@@ -51,7 +56,6 @@ x <- c("This is a sentence to practice regular expressions",
 str_view(x, "re")
 str_view(x, "regex")
 str_view(x, "sentence")
-str_view_all(x, "sentence")
 ```
 
 This is fine, but regular expressions are more powerful than simply replacing manually specified characters or full words: they use **meta-characters**, that is characters that have a unique meaning to the regex matching engine and that vastly enhance the search capability.

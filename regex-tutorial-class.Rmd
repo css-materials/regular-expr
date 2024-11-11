@@ -143,6 +143,7 @@ Note the `\\` double-backslashes: this is because to include a literal backslash
 ```{r}
 
 ```
+
 A raw string is a normal string but prefixed with an `r`. Raw strings allow to interpret the backslash `\` as a literal character, rather than an escape character.
 
 **`\D` matches any character that is NOT decimal digit, same as [^0-9]**

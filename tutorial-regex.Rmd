@@ -6,17 +6,17 @@ output:
     toc: true
 ---
 
+Welcome! This tutorial will get you started with regular expressions (regex) and the stringr package from the ground up. There are 5 practice exercises. We'll tackle 1–4 together in class and walk through the solutions live. Exercise 5 is bonus practice to try on your own.
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, results = 'show', 
                       message = FALSE, warning = FALSE)
 ```
 
-## Definition
-
-Regular expressions ("regex" or "regexes") **are strings containing normal characters and/or special meta-characters.** They describe a specific pattern to match in a given text. More formally, regex is a *language on its own right*  used for *pattern matching* in many programming languages.
-
-
 ## Regex with `stringr`: view functions
+
+They describe a specific pattern to match in a given text. More formally, regex is a *language on its own right*  used for *pattern matching* in many programming languages.
+
 
 ```{r}
 library(stringr)
@@ -367,6 +367,22 @@ split_text
 ```
 
 **PRACTICE 5.** Apply regular expressions to "Alice in Wonderland"
+
+Find and replace all uppercase words. Notice `\\b` specifies word boundaries (word boundary anchor) 
+```{r}
+# find
+
+# replace
+
+```
+
+Find all present progressive verbs that have as previous word an auxiliar (e.g., was beginning, was reading)
+```{r}
+
+```
+
+
+**PRACTICE 5 SOLUTIONS** Apply regular expressions to "Alice in Wonderland"
 
 Find and replace all uppercase words. Notice `\\b` specifies word boundaries (word boundary anchor) 
 ```{r}
